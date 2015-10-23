@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Color Guessing Game</title>
+    </head>
+    <body onload="do_game()">
+        <script>
+            var  colors = ["aqua", "blue", "cyan", "orange", "pink", "red", "green"];
+            var  target = "";    // correct color randomly picked by program
+            var  userGuess = "";
+            var  numOfGuesses = 0;
+            var  finished = false;      // loop breaks when finished is true
+            colors.sort();      // colors to pick from
+            //console.log(colors);
+            function do_game()  {
+                var  randNum = Math.random() * colors.length;
+                randNum = Math.floor(randNum);
+                target = colors[randNum];
+                console.log("Correct answer is : " + target);
+
+                while (!finished)  {
+                    userGuess = prompt("I am thinking of one of these colors:\n\n" + colors
+                                        + "\n\nWhat color am I thinking of?");
+                    if (userGuess == target)
+                        finished = true;
+                    //finished = true;
+                }
+
+                myBody=document.getElementsByTagName("body")[0];
+                myBody.style.background=target;     // change browser background to target
+            }
+        </script>
+    </body>
+</html>
