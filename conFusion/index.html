@@ -69,19 +69,17 @@
                 <form class="navbar-form navbar-right" role="log-in">
                     <div class="form-group">
                         <label for="Email" class="sr-only">Email</label>
-                        <input type="text" class="form-control" placeholder="Email" style="height:30px">
+                        <input type="email" class="form-control" placeholder="Email" style="height:30px">
                     </div>
                     <div class="form-group">
                         <label for="Password" class="sr-only">Password</label>
-                        <input type="text" class="form-control" placeholder="Password" style="height:30px">
+                        <input type="password" class="form-control" placeholder="Password" style="height:30px">
                     </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label for="Rememberme" class="checkbox-inline">
-                                <input type="checkbox" name="approve" value="">
-                                <label style="color: white">Remember me</label>
-                            </label>
-                        </div>
+                    <div class="checkbox">
+                        <label for="Rememberme" class="checkbox-inline">
+                            <input type="checkbox" name="approve" value="">
+                            <label style="color: white">Remember me</label>
+                        </label>
                     </div>
                     <label for="Sign In" class="sr-only">SignIn</label>
                     <button type="submit" class="btn btn-info">Sign In</button>
@@ -108,7 +106,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-2">
                     <p style="padding:40px;"></p>
-                    <button type="button" class="btn btn-warning btn-block">Reserve Table</button>
+                    <a class="btn btn-warning btn-block" href="#reserve">Reserve Table</a>
                 </div>
             </div>
         </div>
@@ -124,8 +122,8 @@
                 <div class="media">
                     <div class="media-left media-middle">
                         <a href="#">
-                        <img class="media-object img-thumbnail"
-                         src="img/uthappizza.png" alt="Uthappizza">
+                            <img class="media-object img-thumbnail"
+                             src="img/uthappizza.png" alt="Uthappizza">
                         </a>
                     </div>
                     <div class="media-body">
@@ -150,10 +148,24 @@
                 <p style="padding:20px;"></p>
                 <h3 align="center">This Month's Promotions</h3>
             </div>
+
             <div class="col-xs-12 col-sm-9">
-                <h2>Weekend Grand Buffet</h2>
-                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
-                <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                <div class="media">
+                    <div class="media-body">
+                        <h2 class="media-heading">Weekend Grand Buffet
+                            <span class="label label-danger label-xs">New</span>
+                        </h2>
+
+                        <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
+                        <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                    </div>
+                    <div class="media-right media-middle">
+                        <a href="#">
+                            <img class="media-object img-thumbnail"
+                             src="img/buffet.png" alt="Buffet">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -166,8 +178,8 @@
                 <div class="media">
                     <div class="media-left media-middle">
                         <a href="#">
-                        <img class="media-object img-thumbnail"
-                         src="img/alberto.png" alt="Alberto Somayya">
+                            <img class="media-object img-thumbnail"
+                             src="img/alberto.png" alt="Alberto Somayya">
                         </a>
                     </div>
                     <div class="media-body">
@@ -181,6 +193,75 @@
                         <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row row-content" id="reserve">
+            <div class="col-xs-12 col-sm-3">
+                <p style="padding:20px;"></p>
+                <h3 align="center">Reserve a Table</h3>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="numOfGuests" class="col-sm-2 control-label">Number of Guests</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> 4
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5"> 5
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio6" value="option6"> 6
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    	<label for="date_time" class="col-sm-2 control-label">Date and Time</label>
+                        <div class="col-sm-10 form-inline" id="date_time">
+                        	<div class="row">
+                                <div class="col-sm-4">
+                                	<div class="form-group has-feedback">
+                                		<label class="control-label sr-only" for="date">Date</label>
+                                		<input type="text" class="form-control" id="date" placeholder="Date" aria-describedby="gl_date">
+                                	    <span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+          								<span id="gl_date" class="sr-only">(date)</span>
+                               		</div>
+                                </div>
+                                <div class="col-sm-4 col-sm-offset-1">
+                                	<div class="form-group has-feedback">
+                                		<label class="control-label sr-only" for="time">Time</label>
+                                		<input type="text" class="form-control" id="date" placeholder="Time" aria-describedby="gl_time">
+                                 	    <span class="glyphicon glyphicon-time form-control-feedback" aria-hidden="true"></span>
+          								<span id="gl_time" class="sr-only">(time)</span>
+                              	    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Reserve</button>
+                        </div>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Warning:</strong>: Please
+                            <a href="tel:+85212345678" class="alert-link"> call </a>
+                            us to reserve for more than six guests.
+                    </div>
+                </form>
             </div>
         </div>
     </div>
