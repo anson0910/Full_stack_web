@@ -72,3 +72,8 @@ body{
 .affix {
     top:100px;
 }
+
+.modal-lg {
+    width: 620px;   /* Extend width of modal-lg so that it fits in Chrome */
+    height: 300px;
+}

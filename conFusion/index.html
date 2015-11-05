@@ -67,27 +67,51 @@
                          </a>
                      </li>
                 </ul>
-                <form class="navbar-form navbar-right" role="log-in">
-                    <div class="form-group">
-                        <label for="Email" class="sr-only">Email</label>
-                        <input type="email" class="form-control" placeholder="Email" style="height:30px">
-                    </div>
-                    <div class="form-group">
-                        <label for="Password" class="sr-only">Password</label>
-                        <input type="password" class="form-control" placeholder="Password" style="height:30px">
-                    </div>
-                    <div class="checkbox">
-                        <label for="Rememberme" class="checkbox-inline">
-                            <input type="checkbox" name="approve" value="">
-                            <label style="color: white">Remember me</label>
-                        </label>
-                    </div>
-                    <label for="Sign In" class="sr-only">SignIn</label>
-                    <button type="submit" class="btn btn-info">Sign In</button>
-                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a data-toggle="modal" data-target="#loginModal" href="#">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Change class from navbar-form navbar-right to form-inline when moving from navbar to modal-->
+                    <form class="form-inline" role="log-in">
+                        <div class="form-group">
+                            <label for="Email" class="sr-only">Email</label>
+                            <input type="email" class="form-control input-sm" placeholder="Email" style="height:30px">
+                        </div>
+                        <div class="form-group">
+                            <label for="Password" class="sr-only">Password</label>
+                            <input type="password" class="form-control input-sm" placeholder="Password" style="height:30px">
+                        </div>
+                        <div class="checkbox">
+                            <label for="Rememberme" class="checkbox-inline">
+                                <input type="checkbox" name="approve" value="">
+                                <!-- previously was <label style="color: white">Remember me</label> to appear in navbar-->
+                                Remember me
+                            </label>
+                        </div>
+                        <label for="Sign In" class="sr-only">SignIn</label>
+                        <button type="submit" class="btn btn-info">Sign In</button>
+                        <button type="button" class="btn btn-default btn-sm"
+                                data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <header class="jumbotron">
 
