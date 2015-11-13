@@ -96,3 +96,11 @@ body{
     background-image: none;
 }
 */
+
+/* position the buttons at the bottom-right corner of the carousel
+*/
+#carouselButtons {
+    right:0px;
+    position: absolute;
+    bottom: 0px;
+}

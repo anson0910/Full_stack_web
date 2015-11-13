@@ -201,6 +201,22 @@
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
+                    <!-- Buttons to play and pause the carousel -->
+                    <div id="carouselButtons">
+                        <button class="btn btn-danger btn-xs" id="carousel-pause-play">
+                            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <!-- if splitting to two buttons
+                    <div class="btn-group" id="carouselButtons">
+                        <button class="btn btn-danger btn-xs" id="carousel-pause">
+                    	    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-danger btn-xs" id="carousel-play">
+                    	    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    -->
                 </div>
             </div>
         </div>
@@ -494,6 +510,37 @@
         $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
          });
+    </script>
+    <script>
+        /* if splitting to two buttons
+        $(document).ready(function(){
+            // set carousel cycle time to 2 seconds
+            $("#mycarousel").carousel( { interval: 2000 } );
+            $("#carousel-pause").click(function(){
+                $("#mycarousel").carousel('pause');
+            });
+            $("#carousel-play").click(function(){
+                $("#mycarousel").carousel('cycle');
+            });
+        });
+        */
+        $(document).ready(function() {
+            var myCarousel = $('#mycarousel');
+            var carouselPausePlay = $('#carousel-pause-play');
+            var carouselSpan = $('#carousel-pause-play > span');
+            function carouselPause() {
+                myCarousel.carousel('pause');
+                carouselSpan.removeClass('glyphicon-pause').addClass('glyphicon-play');
+                $(this).off('click', carouselPause).on('click', carouselPlay);
+            }
+            function carouselPlay() {
+                myCarousel.carousel('cycle');
+                carouselSpan.removeClass('glyphicon-play').addClass('glyphicon-pause');
+                $(this).off('click', carouselPlay).on('click', carouselPause);
+            }
+            myCarousel.carousel({'interval': 2000});
+            carouselPausePlay.on('click', carouselPause);
+        });
     </script>
 </body>
 
