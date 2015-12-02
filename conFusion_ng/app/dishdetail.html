@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" ng-app="confusionApp">
 
@@ -27,12 +26,44 @@
 <body>
 
     <div class="container">
-        <div class="row row-content">
+        <div class="row row-content" ng-init="dish=dishDetailCtrl.dish"
+            ng-controller="dishDetailController as dishDetailCtrl">
             <div class="col-xs-12">
-                <p>Put the dish details here</p>
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                            <img class="media-object img-thumbnail"
+                             ng-src={{dish.image}} alt="Uthapizza">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading">{{dish.name}}
+                            <span class="label label-danger">{{dish.label}}</span>
+                            <span class="badge">{{dish.price | currency}}</span>
+                        </h2>
+                        <p>{{dish.description}}</p>
+                    </div>
+                </div>
             </div>
             <div class="col-xs-9 col-xs-offset-1">
-                <p>Put the comments here</p>
+                    <div class="col-xs-4">
+                        <h4><b>Customer Comments</b></h4>
+                    </div>
+                    <div class="col-xs-8">
+                        Sort by: <input type="text" ng-model="dish.sortCriteria">
+                    </div>
+            </div>
+            <div class="col-xs-9 col-xs-offset-1">
+                <div ng-repeat="comment in dish.comments | orderBy:dish.sortCriteria">
+                    <blockquote>
+                        <p>{{comment.rating}} Stars</p>
+                        <p>{{comment.comment}}</p>
+                        <footer>
+                            {{comment.author}},
+                            <span>{{comment.date | date:'mediumDate'}}</span><br>
+                        </footer>
+                    </blockquote>
+                </div>
             </div>
         </div>
 
@@ -51,6 +82,7 @@
                         category: 'mains',
                         label:'Hot',
                         price:'4.99',
+                        sortCriteria: '',
                         description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
                         comments: [
                                {
