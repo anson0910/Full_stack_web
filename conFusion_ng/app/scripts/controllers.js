@@ -59,9 +59,9 @@ app.controller('FeedbackController', ['$scope', function($scope) {
         };
     }]);
 
-app.controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory',
-    function($scope, $routeParams, menuFactory) {
-        var dish = menuFactory.getDish(parseInt($routeParams.id, 10));
+app.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory',
+    function($scope, $stateParams, menuFactory) {
+        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
         $scope.dish = dish;
     }]);
 
@@ -80,5 +80,5 @@ app.controller('DishCommentController', ['$scope', function($scope) {
             $scope.commentForm.$setPristine();
             //Step 5: reset your JavaScript object that holds your comment
             $scope.feedback = {author:"", rating:5, comment:"", date:""};
-        }
+        };
     }]);
