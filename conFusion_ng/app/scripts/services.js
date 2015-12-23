@@ -221,7 +221,7 @@ angular.module('confusionApp')
             },
             {
                 name: "Agumbe Tang",
-                      image: 'images/alberto.png',
+                image: 'images/alberto.png',
                 designation: "Chief Taste Officer",
                 abbr: "CTO",
                 description: "Blessed with the most discerning gustatory sense, Agumbe, our CFO, personally ensures that every dish that we serve meets his exacting tastes. Our chefs dread the tongue lashing that ensues if their dish does not meet his exacting standards. He lives by his motto, You click only if you survive my lick."
@@ -238,11 +238,11 @@ angular.module('confusionApp')
 
         corpfac.getLeaders = function()   {
             return leadership;
-        }
+        };
 
         corpfac.getLeader = function (index)   {
             return leadership[index];
-        }
+        };
         return corpfac;
     })
 

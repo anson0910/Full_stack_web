@@ -93,7 +93,7 @@ angular.module('confusionApp')
             $scope.commentForm.$setPristine();
             // Reset JavaScript object that holds comment
             $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-        }
+        };
     }])
 
     .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory)  {
@@ -107,7 +107,7 @@ angular.module('confusionApp')
     }])
 
     .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory)    {
-        var leadership = corporateFactory.getLeaders;
+        var leadership = corporateFactory.getLeaders();
         $scope.leadership = leadership;
     }])
 
