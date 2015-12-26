@@ -11,8 +11,8 @@ If http-server is not installed, please install by typing <br>
 
 
 Another alternative is to change directory to confusion_ng/json-server folder, and type in terminal <br>
-% gulp
-% json-server --watch db.json
+% gulp <br>
+% json-server --watch db.json <br>
 and from browser, connect to <br>
 localhost:3000
 
