@@ -11,7 +11,7 @@ angular.module('confusionApp')
         // the filtText should not filter out any item from the menu.
         // Hence filtText is set to the empty string.
 
-        $scope.dishes = {};
+        $scope.dishes = [];
         menuFactory.getDishes()
             .then(
                 function(response)  {
