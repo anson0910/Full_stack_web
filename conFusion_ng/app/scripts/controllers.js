@@ -11,7 +11,13 @@ angular.module('confusionApp')
         // the filtText should not filter out any item from the menu.
         // Hence filtText is set to the empty string.
 
-        $scope.dishes= menuFactory.getDishes();
+        $scope.dishes = {};
+        menuFactory.getDishes()
+            .then(
+                function(response)  {
+                    $scope.dishes = response.data;
+                }
+            );
 
         $scope.select = function(setTab) {
             $scope.tab = setTab;
@@ -72,9 +78,15 @@ angular.module('confusionApp')
 
     .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
 
-        var dish= menuFactory.getDish(parseInt($stateParams.id,10));
+        $scope.dish = {};
 
-        $scope.dish = dish;
+        menuFactory.getDish(parseInt($stateParams.id,10))
+            .then(
+                function(response)  {
+                    $scope.dish = response.data;
+                    $scope.showDish = true;
+                }
+            );
 
     }])
 
@@ -97,13 +109,20 @@ angular.module('confusionApp')
     }])
 
     .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory)  {
-        var dish = menuFactory.getDish(0);
         var promotion = menuFactory.getPromotion(0);
         var chef = corporateFactory.getLeader(3);
 
-        $scope.dish = dish;
+        $scope.dish = {};
         $scope.promotion = promotion;
         $scope.chef = chef;
+
+        menuFactory.getDish(0)
+            .then(
+                function(response)  {
+                    $scope.dish = response.data;
+                    $scope.showDish = true;
+                }
+            )
     }])
 
     .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory)    {
