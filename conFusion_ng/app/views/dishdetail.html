@@ -1,8 +1,11 @@
 <div class="container">
     <div class="row row-content" ng-controller="DishDetailController">
+        <div class="col-xs-12" ng-if="!showDish">
+            <h3>{{message}}</h3>
+        </div>
         <!-- Start of dish details -->
-        <div class="col-xs-12">
-            <!-- Button to return to menu -->     
+        <div class="col-xs-12" ng-if="showDish">
+            <!-- Button to return to menu -->
             <button class="btn btn-xs btn-primary pull-right"
                     type="button" ui-sref="app.menu">
                     Back to Menu
