@@ -122,7 +122,7 @@ angular.module('confusionApp')
                     $scope.dish = response.data;
                     $scope.showDish = true;
                 }
-            )
+            );
     }])
 
     .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory)    {
