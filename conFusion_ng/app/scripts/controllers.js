@@ -10,19 +10,9 @@ angular.module('confusionApp')
         // Since the first tab is selected as default,
         // the filtText should not filter out any item from the menu.
         // Hence filtText is set to the empty string.
-        $scope.showMenu = false;
+        $scope.showMenu = true;
         $scope.message = "Loading ...";
-        $scope.dishes = [];
-        menuFactory.getDishes()
-            .then(
-                function(response)  {
-                    $scope.dishes = response.data;
-                    $scope.showMenu = true;
-                },
-                function(response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-            );
+        $scope.dishes = menuFactory.getDishes().query();
 
         $scope.select = function(setTab) {
             $scope.tab = setTab;
@@ -83,21 +73,9 @@ angular.module('confusionApp')
 
     .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
 
-        $scope.dish = {};
-        $scope.showDish = false;
+        $scope.showDish = true;
         $scope.message="Loading ...";
-
-        menuFactory.getDish(parseInt($stateParams.id,10))
-            .then(
-                function(response)  {
-                    $scope.dish = response.data;
-                    $scope.showDish = true;
-                },
-                function(response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-            );
-
+        $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)});
     }])
 
     .controller('DishCommentController', ['$scope', function($scope) {
@@ -122,22 +100,12 @@ angular.module('confusionApp')
         var promotion = menuFactory.getPromotion(0);
         var chef = corporateFactory.getLeader(3);
 
-        $scope.dish = {};
-        $scope.showDish = false;
+        $scope.showDish = true;
         $scope.message="Loading ...";
         $scope.promotion = promotion;
         $scope.chef = chef;
+        $scope.dish = menuFactory.getDishes().get({id:0});
 
-        menuFactory.getDish(0)
-            .then(
-                function(response)  {
-                    $scope.dish = response.data;
-                    $scope.showDish = true;
-                },
-                function(response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-            );
     }])
 
     .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory)    {
