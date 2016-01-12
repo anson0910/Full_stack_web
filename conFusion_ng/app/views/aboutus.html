@@ -56,7 +56,10 @@
         <div class="col-xs-12 col-sm-9">
             <h2>Corporate Leadership</h2>
             <ul class="media-list">
-				<li class="media" ng-repeat="leader in leadership">
+                <div ng-if="!showLeadership">
+                    <h3>{{messageLeadership}}</h3>                    
+                </div>
+				<li class="media" ng-repeat="leader in leadership" ng-if="showLeadership">
                     <div class="media-left media-middle">
                         <img class="media-object img-thumbnail" ng-src={{leader.image}} alt="picture"/>
                     </div>
