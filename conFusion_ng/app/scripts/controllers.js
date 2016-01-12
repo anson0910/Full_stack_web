@@ -116,12 +116,24 @@ angular.module('confusionApp')
     }])
 
     .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory)  {
-        var promotion = menuFactory.getPromotion(0);
+        //var promotion = menuFactory.getPromotion(0);
         var chef = corporateFactory.getLeader(3);
 
+        $scope.showPromotion = false;
         $scope.showDish = false;
-        $scope.message="Loading ...";
-        $scope.promotion = promotion;
+        $scope.messagePromotion = "Loading promotion ...";
+        $scope.messageDish = "Loading dish ...";
+
+        $scope.promotion = menuFactory.getPromotions().get({id:0})
+                        .$promise.then(
+                            function(response){
+                                $scope.promotion = response;
+                                $scope.showPromotion = true;
+                            },
+                            function(response) {
+                                $scope.messagePromotion = "Error: " + response.status + " " + response.statusText;
+                            }
+                        );
         $scope.chef = chef;
         $scope.dish = menuFactory.getDishes().get({id:0})
                         .$promise.then(
@@ -130,7 +142,7 @@ angular.module('confusionApp')
                                 $scope.showDish = true;
                             },
                             function(response) {
-                                $scope.message = "Error: " + response.status + " " + response.statusText;
+                                $scope.messageDish = "Error: " + response.status + " " + response.statusText;
                             }
                         );
 
