@@ -26,4 +26,15 @@ angular.module('confusionApp')
         return corpfac;
     }])
 
+    .factory('feedbackFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+
+        var feedfac = {};
+
+        feedfac.getFeedbacks = function()   {
+            return $resource(baseURL + "feedback/:id", null, {'update':{method:'POST'}});
+        };
+
+        return feedfac;
+    }])
+
 ;

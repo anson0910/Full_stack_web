@@ -1,0 +1,77 @@
+/*
+
+Vivado v2015.3 (64-bit)
+SW Build 1368829 on Mon Sep 28 20:06:39 MDT 2015
+Process ID: 20750
+
+Current time: 	1/7/16 11:20:01 PM CST
+Time zone: 	China Standard Time (Asia/Taipei)
+
+OS: NAME="Ubuntu"
+Version: 3.16.0-38-generic
+Architecture: amd64
+Available processors (cores): 4
+
+DISPLAY: :0
+Screen size: 1920x1080
+Screen resolution (DPI): 96
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_45 64-bit
+Java home: 	/opt/Xilinx/Vivado/2015.3/tps/lnx64/jre
+
+User name: 	anson
+User home directory: /home/anson
+User working directory: /home/anson/Dropbox/Web_Development/conFusion_ng/json-server
+User country: 	TW
+User language: 	zh
+User locale: 	zh_TW
+
+Vivado preferences path: /home/anson/.Xilinx/Vivado/2015.3/vivado.ini
+Vivado layouts directory: /home/anson/.Xilinx/Vivado/2015.3/layouts
+
+GUI allocated memory:	188 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 4,822 MB
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// [GUI Memory]: 32 MB (+30685kb) [00:00:05]
+// [Engine Memory]: 4,822 MB (+4904233kb) [00:00:05]
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_HELP, "Help"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 4,862 MB. GUI used memory: 21 MB. Current time: 1/7/16 11:20:03 PM CST
+dismissMenu(PAResourceItoN.MainMenuMgr_HELP, "Help"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+// Elapsed time: 171 seconds
+selectButton(PAResourceEtoH.GettingStartedView_CREATE_NEW_PROJECT, "Create New Project"); // l:JideButton (JPanel:JComponent, cq:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_NEW_PROJECT
+// [GUI Memory]: 37 MB (+3614kb) [00:02:59]
+// [GUI Memory]: 48 MB (+10108kb) [00:03:00]
+// h:g (cq:JFrame): New Project: addNotify
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// HMemoryUtils.trashcanNow. Engine heap size: 4,885 MB. GUI used memory: 23 MB. Current time: 1/7/16 11:22:58 PM CST
+setText(PAResourceOtoP.ProjectNameChooser_PROJECT_NAME, "ZynqDesign"); // ao:JTextField (JPanel:JComponent, h:g)
+setText(PAResourceOtoP.ProjectNameChooser_PROJECT_NAME, "ZynqDesign"); // ao:JTextField (JPanel:JComponent, h:g)
+selectButton(PAResourceOtoP.ProjectNameChooser_CHOOSE_PROJECT_LOCATION, (String) null); // r:a (ak:JPanel, h:g)
+// Elapsed time: 22 seconds
+setFolderChooser("/home/anson/ZynqProjects/ZynqHW/2014_4");
+setText(PAResourceOtoP.ProjectNameChooser_CHOOSE_PROJECT_LOCATION, "/home/anson/ZynqProjects/ZynqHW/2014_4"); // ao:JTextField (ak:JPanel, h:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// Elapsed time: 17 seconds
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// [GUI Memory]: 51 MB (+849kb) [00:03:59]
+setText("PAResourceOtoP.PartChooser_PARTS_SEARCH_FIELD", (String) null); // OverlayTextField:JTextField (DefaultOverlayable:JPanel, h:g)
+// Elapsed time: 1158 seconds
+setText("PAResourceOtoP.PartChooser_PARTS_SEARCH_FIELD", (String) null); // OverlayTextField:JTextField (DefaultOverlayable:JPanel, h:g)
+// HMemoryUtils.trashcanNow. Engine heap size: 4,887 MB. GUI used memory: 24 MB. Current time: 1/7/16 11:52:58 PM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 4,887 MB. GUI used memory: 22 MB. Current time: 1/8/16 12:22:58 AM CST
+// 'g' command handler elapsed time: 4768 seconds
+// Elapsed time: 3549 seconds
+dismissDialog("New Project"); // h:g (cq:JFrame)
