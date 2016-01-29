@@ -157,9 +157,10 @@ angular.module('conFusion.controllers', [])
 
         // implement the IndexController and About Controller here
 
-        .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory',
-                                        function($scope, menuFactory, corporateFactory) {
+        .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', 'baseURL',
+            function($scope, menuFactory, corporateFactory, baseURL) {
 
+                $scope.baseURL = baseURL;
                 $scope.leader = corporateFactory.get({id:3});
                 $scope.showDish = false;
                 $scope.message="Loading ...";
