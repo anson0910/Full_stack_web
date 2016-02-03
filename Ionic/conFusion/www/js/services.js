@@ -16,23 +16,21 @@ angular.module('conFusion.services', ['ngResource'])
 
             ];
 
-                this.getDishes = function(){
+            this.getDishes = function(){
 
-                    return $resource(baseURL+"dishes/:id",null,  {'update':{method:'PUT' }});
+                return $resource(baseURL+"dishes/:id",null,  {'update':{method:'PUT' }});
 
-                };
+            };
 
-                // implement a function named getPromotion
-                // that returns a selected promotion.
-                this.getPromotion = function() {
-                    return   $resource(baseURL+"promotions/:id");;
-                }
-
+            // implement a function named getPromotion
+            // that returns a selected promotion.
+            this.getPromotion = function() {
+                return   $resource(baseURL+"promotions/:id");;
+            }
 
         }])
 
         .factory('corporateFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-
 
             return $resource(baseURL+"leadership/:id");
 
@@ -40,9 +38,26 @@ angular.module('conFusion.services', ['ngResource'])
 
         .factory('feedbackFactory', ['$resource', 'baseURL', function($resource,baseURL) {
 
-
             return $resource(baseURL+"feedback/:id");
 
+        }])
+
+        .factory('favoriteFactory', ['$resource', 'baseURL', function($resource, baseURL)   {
+
+            var favFac = {};
+            // array of favorite objects with id as only attribute
+            var favorites = [];
+
+            favFac.addToFavorites = function (index)    {
+                // check if index is already in array
+                for (var i = 0; i < favorites.length; i++)  {
+                    if (favorites[i].id === index)
+                        return;
+                }
+                favorites.push({id: index});
+            };
+
+            return favFac;
         }])
 
 ;
