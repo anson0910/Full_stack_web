@@ -51,11 +51,22 @@ angular.module('conFusion.services', ['ngResource'])
             favFac.addToFavorites = function (index)    {
                 // check if index is already in array
                 for (var i = 0; i < favorites.length; i++)  {
-                    if (favorites[i].id === index)
+                    if (favorites[i].id == index)
                         return;
                 }
                 favorites.push({id: index});
             };
+
+            favFac.deleteFromFavorites = function (index)   {
+                for (var i = 0; i < favorites.length; i++)  {
+                    if (favorites[i].id == index)
+                        favorites.splice(i, 1);
+                }
+            };
+
+            favFac.getFavorites = function ()   {
+                return favorites;
+            }
 
             return favFac;
         }])

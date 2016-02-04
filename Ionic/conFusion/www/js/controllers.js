@@ -220,11 +220,56 @@ angular.module('conFusion.controllers', [])
 
             }])
 
-        .controller('AboutController', ['$scope', 'corporateFactory', 'baseURL', function($scope, corporateFactory, baseURL) {
+        .controller('AboutController', ['$scope', 'corporateFactory', 'baseURL',
+            function($scope, corporateFactory, baseURL) {
 
                 $scope.baseURL = baseURL;
                 $scope.leaders = corporateFactory.query();
                 console.log($scope.leaders);
 
             }])
+
+        .controller('FavoritesController', ['$scope', 'menuFactory', 'favoriteFactory',
+            'baseURL', '$ionicListDelegate',
+            function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
+                $scope.baseURL = baseURL;
+                $scope.shouldShowDelete = false;
+                $scope.message = "Loading ...";
+
+                $scope.favorites = favoriteFactory.getFavorites();
+
+                menuFactory.getDishes().query(
+                    function(response) {
+                        $scope.dishes = response;
+                    },
+                    function(response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                });
+                console.log($scope.dishes, $scope.favorites);
+
+                $scope.toggleDelete = function ()   {
+                    $scope.shouldShowDelete = !$scope.shouldShowDelete;
+                    console.log($scope.shouldShowDelete);
+                };
+
+                $scope.deleteFavorite = function (index)    {
+                    favoriteFactory.deleteFromFavorites(index);
+                    $scope.shouldShowDelete = false;
+                };
+
+            }])
+
+
+        .filter('favoriteFilter', function()    {
+            return function (dishes, favorites) {
+                var out = [];
+
+                for (var i = 0; i < favorites.length; i++)
+                    for (var j = 0; j < dishes.length; j++)
+                        if (dishes[j].id == favorites[i].id)
+                            out.push(dishes[j]);
+
+                return out;
+            }
+        })
 ;

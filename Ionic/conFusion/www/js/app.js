@@ -68,11 +68,21 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
         'mainContent': {
           templateUrl: 'templates/menu.html',
           controller: 'MenuController'
-        }
+            }
         }
     })
 
-  .state('app.dishdetails', {
+    .state('app.favorites', {
+        url: '/favorites',
+        views: {
+        'mainContent': {
+          templateUrl: 'templates/favorites.html',
+          controller: 'FavoritesController'
+            }
+        }
+    })
+
+    .state('app.dishdetails', {
         url: '/menu/:id',
         views: {
             'mainContent': {
@@ -80,7 +90,7 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
             controller: 'DishDetailController'
             }
         }
-  });
+    });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
