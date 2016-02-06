@@ -157,8 +157,10 @@ angular.module('conFusion.controllers', [])
             };
         }])
 
-        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL',
-            function($scope, $stateParams, menuFactory, baseURL) {
+        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory',
+                    'favoriteFactory', 'baseURL', '$ionicPopover', '$ionicModal', '$timeout',
+            function($scope, $stateParams, menuFactory, favoriteFactory, baseURL,
+                    $ionicPopover, $ionicModal, $timeout) {
 
             $scope.baseURL = baseURL;
             $scope.dish = {};
@@ -176,6 +178,62 @@ angular.module('conFusion.controllers', [])
                     }
             );
 
+            $ionicPopover.fromTemplateUrl('templates/dishdetail_popover.html', {
+                scope: $scope
+            }).then(function(popover) {
+                $scope.popover = popover;
+            });
+
+            $scope.openPopover = function($event)   {
+                $scope.popover.show($event);
+            };
+
+            $scope.addFavorite = function ()   {
+                favoriteFactory.addToFavorites($scope.dish.id);
+                $scope.popover.hide();
+            };
+
+            // Form data for the comment modal
+            $scope.mycomment = {rating:5, comment:"", author:"", date:""};
+
+            // Create the comment modal that we will use later
+            $ionicModal.fromTemplateUrl('templates/comment.html', {
+              scope: $scope
+            }).then(function(modal) {
+              $scope.commentModal = modal;
+            });
+
+            // Triggered in the comment modal to close it
+            $scope.closeComment = function() {
+                $scope.commentModal.hide();
+                $scope.popover.hide();
+            };
+
+            // Open the comment modal
+            $scope.comment = function() {
+                $scope.commentModal.show();
+            };
+
+            // Perform the login action when the user submits the login form
+            $scope.submitComment = function() {
+                $scope.mycomment.date = new Date().toISOString();
+                console.log('Submitting comment', $scope.mycomment);
+
+                $scope.dish.comments.push($scope.mycomment);
+                menuFactory.getDishes().update({id:$scope.dish.id}, $scope.dish);
+
+                // $scope.commentForm.$setPristine();
+
+                $scope.mycomment = {rating:5, comment:"", author:"", date:""};
+
+                // Simulate a reserve delay. Remove this and replace with your login
+                // code if using a server system
+                $timeout(function() {
+                    $scope.closeComment();
+                }, 1000);
+
+                $scope.popover.hide();
+            };
 
         }])
 
