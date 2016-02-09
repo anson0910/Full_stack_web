@@ -75,6 +75,13 @@ angular.module('conFusion.controllers', [])
 
 .controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate',
         function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
+            /* Better way of showing loading message
+            if (!dishes.$resolved) {
+                $rootScope.$broadcast('loading:show');
+                dishes.$promise.then(function(data) {
+                    $rootScope.$broadcast('loading:hide');
+                });
+            };*/
 
             $scope.baseURL = baseURL;
             $scope.tab = 1;
