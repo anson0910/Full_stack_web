@@ -268,7 +268,7 @@ angular.module('conFusion.controllers', [])
 
         .controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory',
             'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout',
-            function($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate,
+                function($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate,
                     $ionicPopup, $ionicLoading, $timeout) {
                 $scope.baseURL = baseURL;
                 $scope.shouldShowDelete = false;
