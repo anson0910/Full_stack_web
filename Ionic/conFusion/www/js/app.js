@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers', 'conFusion.services'])
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, $timeout) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, $timeout, $state) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -44,6 +44,12 @@ angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers', 'con
         console.log('done');
         $rootScope.$broadcast('loading:hide');
     });
+
+    // Move to favorites state when user clicks on notification
+    $rootScope.$on('$cordovaLocalNotification:click', function (event, notification, state) {
+        console.log("Notification clicked");
+        $state.go('app.favorites');
+    })
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
