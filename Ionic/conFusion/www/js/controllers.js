@@ -228,7 +228,7 @@ angular.module('conFusion.controllers', [])
                             // error
                         });
                 });
-            }
+            };
         }])
 
         .controller('ContactController', ['$scope', function($scope) {
@@ -265,11 +265,11 @@ angular.module('conFusion.controllers', [])
 
         .controller('DishDetailController', ['$scope', '$stateParams', 'dish', 'menuFactory',
                     'favoriteFactory', 'baseURL', '$ionicPopover', '$ionicModal', '$timeout',
+                    '$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast',
             function($scope, $stateParams, dish, menuFactory, favoriteFactory, baseURL,
-                    $ionicPopover, $ionicModal, $timeout) {
+                    $ionicPopover, $ionicModal, $timeout, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
 
             $scope.baseURL = baseURL;
-            $scope.dish = {};
             $scope.showDish = true;
             $scope.message="Loading ...";
 
@@ -287,6 +287,28 @@ angular.module('conFusion.controllers', [])
 
             $scope.addFavorite = function ()   {
                 favoriteFactory.addToFavorites($scope.dish.id);
+
+                $ionicPlatform.ready(function() {
+                    $cordovaLocalNotification.schedule({
+                        id: 1,
+                        title: "Added Favorite",
+                        text: $scope.dish.name
+                    }).then(function()  {
+                        console.log("Added Favorite " + $scope.dish.name);
+
+                    }, function()   {
+                        console.log("Failed to add notification");
+                    });
+
+                    $cordovaToast.show("Added Favorite " + $scope.dish.name,
+                                        'long', 'bottom')
+                        .then(function (success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
+                });
+
                 $scope.popover.hide();
             };
 
