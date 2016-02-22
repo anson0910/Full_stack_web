@@ -139,7 +139,7 @@ angular.module('conFusion.controllers', [])
 
         $scope.openGallery = function() {
           $cordovaImagePicker.getPictures(optionsGallery).then(function(imageData) {
-            $scope.registration.imgSrc = "data:image/jpeg;base64," + imageData[0];
+            $scope.registration.imgSrc = imageData[0];
           }, function(err) {
             console.log(err);
           });
