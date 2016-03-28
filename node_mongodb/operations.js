@@ -1,3 +1,4 @@
+// Node Module of Database Operations
 var assert = require('assert');
 
 exports.insertDocument = function(db, document, collection, callback) {
@@ -28,7 +29,7 @@ exports.removeDocument = function(db, document, collection, callback) {
   // Delete the first document that matches
   coll.deleteOne(document, function(err, result)  {
     assert.equal(err, null);
-    console.log("Removed the document " + document);
+    console.log("Removed the document ", document);
     callback(result);
   });
 };
@@ -39,7 +40,7 @@ exports.updateDocument = function(db, document, update, collection, callback) {
   // Update document
   coll.updateOne(document, {$set: update}, null, function(err, result)  {
     assert.equal(err, null);
-    console.log("Updated the document with " + update);
+    console.log("Updated the document with ", update);
     callback(result);
   });
 };
