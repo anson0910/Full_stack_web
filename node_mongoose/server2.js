@@ -41,7 +41,7 @@ db.once('open', function()  {
 
         db.collection('dishes').drop(function() {
           db.close();
-        })
+        });
       });
     }, 3000);
   });
