@@ -8,15 +8,15 @@ var commentSchema = new Schema({
     type: Number,
     min: 1,
     max: 5,
-    required = true
+    required: true
   },
   comment: {
     type: String,
-    required = true
+    required: true
   },
   author: {
     type: String,
-    required = true
+    required: true
   }
 }, {
   timestamps: true
