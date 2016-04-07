@@ -23,7 +23,7 @@ leaderRouter.route('/')
       if (err)  throw err;
       console.log("Leader created!");
       var id = leader._id;
-      res.writeHead(200, {
+      res.writeHead(201, {
         'Content-Type': 'text/plain'
       });
       res.end("Added the leader with id: " + id);

@@ -23,10 +23,13 @@ promotionRouter.route('/')
       if (err)  throw err;
       console.log("Promotion created!");
       var id = promotion._id;
-      res.writeHead(200, {
-        'Content-Type': 'text/plain'
-      });
-      res.end("Added the promotion with id: " + id);
+      // Can respond with text or json data
+      res.status(201);
+      res.json(promotion);
+      // res.writeHead(201, {
+      //   'Content-Type': 'text/plain'
+      // });
+      //res.end("Added the promotion with id: " + id);
     });
   })
 

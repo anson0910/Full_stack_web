@@ -33,7 +33,7 @@ exports.verifyOrdinaryUser = function(req, res, next) {
   } else {
     // if there is no token, return error
     var err = new Error('No token provided!');
-    err.status = 403;
+    err.status = 401;
     return next(err);
   }
 };

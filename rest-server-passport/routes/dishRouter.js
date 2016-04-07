@@ -27,7 +27,7 @@ dishRouter.route('/')
       else {
         console.log("Dish created!");
         var id = dish._id;
-        res.writeHead(200, {
+        res.writeHead(201, {
           'Content-Type': 'text/plain'
         });
         res.end("Added the dish with id: " + id);
