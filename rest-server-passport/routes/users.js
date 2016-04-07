@@ -6,8 +6,12 @@ var User = require('../models/user');
 var Verify = require('./verify');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
+  User.find({}, function(err, users)  {
+    if (err)  throw err;
+    // Return users in JSON format
+    res.json(users);
+  });
 });
 
 router.post('/register', function(req, res) {
