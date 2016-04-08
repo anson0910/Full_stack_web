@@ -96,6 +96,7 @@ dishRouter.route('/:dishId/comments')
       dish.save(function(err, dish) {
         if (err)  throw err;
         console.log("Updated comments!");
+        res.status(201);
         res.json(dish);
       });
     });
