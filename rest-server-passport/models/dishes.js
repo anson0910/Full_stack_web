@@ -17,9 +17,9 @@ var commentSchema = new Schema({
     type: String,
     required: true
   },
-  author: {
-    type: String,
-    required: true
+  postedBy: {   // reference to User model
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 }, {
   timestamps: true
@@ -42,7 +42,7 @@ var dishSchema = new Schema({
   },
   label: {
     type: String,
-    default: "",    
+    default: "",
   },
   price: {
     type: Currency,
