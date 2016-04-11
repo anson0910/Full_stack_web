@@ -16,7 +16,7 @@ exports.facebook = passport.use(new FacebookStrategy({
   callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done)  {
-    User.findOne({OauthID: profile.id, provider: profile.provider}, function(err, user) {
+    User.findOne({email: profile.email, provider: profile.provider}, function(err, user) {
       if (err) {
         // console.log(err);   // handle errors
         return done(err);
@@ -32,6 +32,7 @@ exports.facebook = passport.use(new FacebookStrategy({
         user.OauthID = profile.id;
         user.OauthToken = accessToken;
         user.provider = profile.provider;
+        user.email = profile.email;
         user.save(function(err) {
           if (err)  {
             console.log(err);   // handel errors
