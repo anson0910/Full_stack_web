@@ -16,19 +16,22 @@ exports.facebook = passport.use(new FacebookStrategy({
   callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done)  {
-    User.findOne({OAuthID: profile.id}, function(err, user) {
+    User.findOne({OauthID: profile.id, provider: profile.provider}, function(err, user) {
       if (err) {
-        console.log(err);   // handle errors
+        // console.log(err);   // handle errors
+        return done(err);
       }
       if (!err && user !== null)  {
+        console.log("User in database");
         done(null, user);
       }
       else {
         user = new User({
           username: profile.displayName
         });
-        user.OAuthID = profile.id;
-        user.OAuthToken = accessToken;
+        user.OauthID = profile.id;
+        user.OauthToken = accessToken;
+        user.provider = profile.provider;
         user.save(function(err) {
           if (err)  {
             console.log(err);   // handel errors

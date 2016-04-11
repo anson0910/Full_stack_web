@@ -9,8 +9,9 @@ var User = new Schema({
     unique: true
   },
   password: String,
-  OAuthId: String,
-  OAuthToken: String,
+  OauthId: String,
+  OauthToken: String,
+  provider: String,
   firstname: {
     type: String,
     default: ''

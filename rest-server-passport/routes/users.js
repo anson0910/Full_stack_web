@@ -61,6 +61,7 @@ router.get('/logout', function(req, res)  {
 // Facebook OAuth
 router.get('/facebook', passport.authenticate('facebook'),
   function(req, res) {});
+  
 router.get('/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info)  {
     if (err)  {
