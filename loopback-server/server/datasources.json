@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "MongoDB": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "conFusion",
+    "password": "",
+    "name": "MongoDB",
+    "user": "",
+    "connector": "mongodb"
   }
 }
