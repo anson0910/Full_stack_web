@@ -10,9 +10,9 @@ var promotionRouter = express.Router();
 promotionRouter.use(bodyParser.json());
 
 promotionRouter.route('/')
-  .get(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Promotions.find({}, function(err, promotions) {
-      if (err)  throw err;
+  .get(function(req, res, next) {
+    Promotions.find(req.query, function(err, promotions) {
+      if (err)  next(err);
       // Return promotions in JSON format
       res.json(promotions);
     });
@@ -20,7 +20,7 @@ promotionRouter.route('/')
 
   .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Promotions.create(req.body, function(err, promotion) {
-      if (err)  throw err;
+      if (err)  next(err);
       console.log("Promotion created!");
       var id = promotion._id;
       // Can respond with text or json data
@@ -35,15 +35,15 @@ promotionRouter.route('/')
 
   .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Promotions.remove({}, function(err, resp) {
-      if (err)  throw err;
+      if (err)  next(err);
       res.json(resp);
     });
   });
 
 promotionRouter.route('/:promotionId')
-  .get(Verify.verifyOrdinaryUser, function(req, res, next) {
+  .get(function(req, res, next) {
     Promotions.findById(req.params.promotionId, function(err, promotion) {
-      if (err)  throw err;
+      if (err)  next(err);
       res.json(promotion);
     });
   })
@@ -61,7 +61,7 @@ promotionRouter.route('/:promotionId')
 
   .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Promotions.findByIdAndRemove(req.params.promotionId, function(err, resp) {
-      if (err)  throw err;
+      if (err)  next(err);
       res.json(resp);
     });
   });

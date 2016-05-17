@@ -8,7 +8,7 @@ var Verify = require('./verify');
 /* GET users listing. */
 router.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
   User.find({}, function(err, users)  {
-    if (err)  throw err;
+    if (err)  next(err);
     // Return users in JSON format
     res.json(users);
   });
@@ -42,7 +42,9 @@ router.post('/login', function(req, res, next) {
       if (err)  {
         return res.status(500).json({err: 'Could not log in user'});
       }
-      var token = Verify.getToken(user);
+      // var token = Verify.getToken(user);
+      // Generate token with important information only to reduce size
+      var token = Verify.getToken({"username":user.username, "_id":user._id, "admin":user.admin});
       res.status(200).json({
         status: 'Login successful',
         success: true,

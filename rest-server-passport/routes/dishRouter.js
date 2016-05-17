@@ -10,14 +10,15 @@ var dishRouter = express.Router();
 dishRouter.use(bodyParser.json());
 
 dishRouter.route('/')
-  .get(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Dishes.find({})
+  .get(function(req, res, next) {
+    // if input URL is localhost:3443/dishes?featured=true, req.query will be {featured: "true"}
+    Dishes.find(req.query)
       /* Populate will substitute all postedBy fields in comments to user info.
       *  Should be used with cause, increases query time.
       */
       .populate('comments.postedBy')
       .exec(function(err, dishes) {
-        if (err)  throw err;
+        if (err) next(err);
         // Return dishes in JSON format
         res.json(dishes);
       });
@@ -42,7 +43,7 @@ dishRouter.route('/')
 
   .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Dishes.remove({}, function(err, resp) {
-      if (err)  throw err;
+      if (err)  next(err);
       res.json(resp);
     });
   });
@@ -52,7 +53,7 @@ dishRouter.route('/:dishId')
     Dishes.findById(req.params.dishId)
       .populate('comments.postedBy')
       .exec(function(err, dish) {
-        if (err)  throw err;
+        if (err)  next(err);
         res.json(dish);
       });
   })
@@ -63,38 +64,38 @@ dishRouter.route('/:dishId')
     }, {
       new: true
     }, function(err, dish) {
-      if (err)  throw err;
+      if (err)  next(err);
       res.json(dish);
     });
   })
 
   .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Dishes.findByIdAndRemove(req.params.dishId, function(err, resp) {
-      if (err)  throw err;
+      if (err)  next(err);
       res.json(resp);
     });
   });
 
 dishRouter.route('/:dishId/comments')
-  .all(Verify.verifyOrdinaryUser)   // users must be logged in to see or post comments
   .get(function(req, res, next) {
     Dishes.findById(req.params.dishId)
       .populate('comments.postedBy')
       .exec(function(err, dish) {
-        if (err)  throw err;
+        if (err)  next(err);
         // Return comments in JSON format
         res.json(dish.comments);
       });
   })
 
-  .post(function(req, res, next) {
+  // users must be logged in to post comments
+  .post(Verify.verifyOrdinaryUser, function(req, res, next) {
     Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err)  throw err;
+      if (err)  next(err);
       // Retrieve id from request message decoded by Verify.verifyOrdinaryUser
-      req.body.postedBy = req.decoded._doc._id;
+      req.body.postedBy = req.decoded._id;
       dish.comments.push(req.body);
       dish.save(function(err, dish) {
-        if (err)  throw err;
+        if (err)  next(err);
         console.log("Updated comments!");
         res.status(201);
         res.json(dish);
@@ -102,14 +103,14 @@ dishRouter.route('/:dishId/comments')
     });
   })
 
-  .delete(Verify.verifyAdmin, function(req, res, next) {
+  .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err)  throw err;
+      if (err)  next(err);
       for (var i = dish.comments.length - 1; i >= 0; i--) {
         dish.comments.id(dish.comments[i]._id).remove();
       }
       dish.save(function(err, result) {
-        if (err)  throw err;
+        if (err)  next(err);
         res.writeHead(200, {
           'Content-Type': 'text/plain'
         });
@@ -119,52 +120,51 @@ dishRouter.route('/:dishId/comments')
   });
 
 dishRouter.route('/:dishId/comments/:commentId')
-  .all(Verify.verifyOrdinaryUser)   // users must be logged in to see, update or delete comments
-  .get(function(req, res, next) {
+  .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Dishes.findById(req.params.dishId)
       .populate('comments.postedBy')
       .exec(function(err, dish) {
-        if (err)  throw err;
+        if (err)  next(err);
         // Return comment in JSON format
         res.json(dish.comments.id(req.params.commentId));
       });
   })
 
-  .put(function(req, res, next) {
+  .put(Verify.verifyOrdinaryUser, function(req, res, next) {
     // We delete the existing commment and insert the updated
     // comment as a new comment
     Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err)  throw err;
+      if (err)  next(err);
 
-      if (dish.comments.id(req.params.commentId).postedBy != req.decoded._doc._id) {
+      if (dish.comments.id(req.params.commentId).postedBy != req.decoded._id) {
         var err = new Error('You are not authorized to perform this operation!');
         err.status = 403;
         return next(err);
       }
       // Retrieve id from request message decoded by Verify.verifyOrdinaryUser
-      req.body.postedBy = req.decoded._doc._id;
+      req.body.postedBy = req.decoded._id;
       dish.comments.id(req.params.commentId).remove();
       dish.comments.push(req.body);
       dish.save(function(err, dish) {
-        if (err)  throw err;
+        if (err)  next(err);
         console.log("Updated comment!");
         res.json(dish);
       });
     });
   })
 
-  .delete(function(req, res, next) {
+  .delete(Verify.verifyOrdinaryUser, function(req, res, next) {
     Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err)  throw err;
+      if (err)  next(err);
 
-      if (dish.comments.id(req.params.commentId).postedBy != req.decoded._doc._id) {
+      if (dish.comments.id(req.params.commentId).postedBy != req.decoded._id) {
         var err = new Error('You are not authorized to perform this operation!');
         err.status = 403;
         return next(err);
       }
       dish.comments.id(req.params.commentId).remove();
       dish.save(function(err, resp) {
-        if (err)  throw err;
+        if (err)  next(err);
         res.json(resp);
       });
     });

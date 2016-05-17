@@ -52,6 +52,10 @@ var dishSchema = new Schema({
     type: String,
     required: true
   },
+  featured: {   // featured attribute, true if to be presented in home page
+    type: Boolean,
+    default:false
+  },
   comments: [commentSchema]
 }, {
   timestamps: true

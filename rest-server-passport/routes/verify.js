@@ -40,11 +40,21 @@ exports.verifyOrdinaryUser = function(req, res, next) {
 
 // Verify if a user is admin, should follow verifyOrdinaryUser() in the middleware order in Express
 exports.verifyAdmin = function(req, res, next) {
-  if (req.decoded._doc.admin) {
-    return next();
-  } else {
+
+  if (!req.decoded)   {
     var err = new Error('You are not authorized to perform this operation!');
     err.status = 403;
     return next(err);
+  } else {
+    var id = req.decoded._id;
+    
+    if (req.decoded.admin) {
+      return next();
+    } else {
+      var err = new Error('You are not authorized to perform this operation!');
+      err.status = 403;
+      return next(err);
+    }
   }
+
 };
